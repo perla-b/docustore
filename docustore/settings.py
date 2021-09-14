@@ -80,7 +80,7 @@ DATABASES = {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': BASE_DIR / 'test',
          'ENGINE' : 'django.db.backends.postgresql',
-         'NAME' : 'd7berigiebtl0g'.
+         'NAME' : 'd7berigiebtl0g',
          'USER' : 'dfhrlgnxeebwbi',
          'PORT' : '5432',
          'PASSWORD' : 'ee3a828bead941adb623f4fde1469fdcee7136b72cb048282d0bcc417941d189',
