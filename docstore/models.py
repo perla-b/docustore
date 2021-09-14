@@ -12,7 +12,7 @@ class Topic(models.Model):
 		return self.name
 
 class TaggableObject(models.Model):
-	topics = models.ManyToManyField(Topic,)
+	topics = models.ManyToManyField(Topic)
 	class Meta:
 		abstract = True
 
