@@ -5,6 +5,8 @@ from django.db.models import QuerySet
 from docstore.models import Folder, Document, Topic
 from django.core import serializers
 from docstore import model_search
+import json
+
 
 datatypes = ['folder', 'doc', 'topic']
     
@@ -22,11 +24,15 @@ def search(request):
     return items
 
 def serialize(items):
-    data = serializers.serialize('xml', items, fields=('name','size'))
+    data = serializers.serialize('json', items)
+    return data
 
 def list(request):
     items = search(request)
-    return HttpResponse(str([e.name for e in items]))
+    url = request.get_host()
+    dicts = [item.to_dict(url) for item in items]
+    data = json.dumps(dicts, indent=4)
+    return HttpResponse(data, content_type='json')
 
 def download(request):
     pass

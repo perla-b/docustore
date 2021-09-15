@@ -45,6 +45,7 @@ def find_docs(attrs):
     # Filter by name and list of topics
     items = filter_by_name(items, attrs)
     items = filter_by_topics(items, attrs)
+    return items
 
 def find_topics(attrs):
     ''' Returns topics with given attrs '''
