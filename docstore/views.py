@@ -1,10 +1,6 @@
 from django.http import response
 from django.http.response import HttpResponseBadRequest, HttpResponsePermanentRedirect
-from django.shortcuts import render
 from django.http import HttpResponse, FileResponse
-from django.db.models import QuerySet
-from docstore.models import Folder, Document, Topic
-from django.core import serializers
 from docstore import model_search
 
 import zipfile
@@ -86,13 +82,16 @@ def list(request):
 def download(request):
     items, dtype = search(request)
 
-    if dtype is None or len(items) == 0:
+    # Empty lists should not return any data
+    if len(items) == 0:
         return HttpResponse('No matching data', status=204)
 
+    # Write folders or documents to zip file and format response
     if dtype == 'folders':
         response = write_folders(items)
     elif dtype == 'docs':
         response = write_documents(items)
+    # Otherwise, notify of bad request
     else:
         response = HttpResponseBadRequest()
 
