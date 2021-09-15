@@ -6,7 +6,7 @@ max_wlen = 200
 
 class Topic(models.Model):
 	name = models.CharField(max_length=max_wlen, primary_key=True)
-	long_name = models.CharField(max_length=max_wlen)
+	desc = models.CharField(max_length=max_wlen)
 	
 	def __str__(self):
 		return self.name
@@ -15,7 +15,7 @@ class Topic(models.Model):
 		''' Returns dictionary representation of Topic '''
 		values = {
 			'key' : self.name,
-			'desc' : self.long_name
+			'desc' : self.desc
 		}
 		return values
 
