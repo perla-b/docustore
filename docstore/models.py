@@ -19,15 +19,27 @@ class TaggableObject(models.Model):
 
 class Folder(TaggableObject):
 	name = models.CharField(max_length=max_wlen)
-
 	def __str__(self):
 		return self.name
 
 class Document(TaggableObject):
 	name = models.CharField(max_length=max_wlen)
-	file = models.FileField(settings.MEDIA_ROOT) # TODO: Set the location
+	file = models.FileField(settings.MEDIA_ROOT)
 	folder_key = models.ForeignKey(Folder, on_delete=models.SET_NULL, 
-		null=True) # Is a folder necessary? 
-	
+		null=True)
+
 	def __str__(self):
 		return (self.name)
+
+'''
+	folder
+		name
+		topics
+	docs
+		name
+		topics
+		folder
+	topic
+		name
+		folder
+'''
