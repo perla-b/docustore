@@ -20,4 +20,5 @@ from docstore import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('list/', views.list),
+    path('download/', views.download)
 ]

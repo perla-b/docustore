@@ -12,16 +12,15 @@ class Topic(models.Model):
 		return self.name
 
 	def to_dict(self, url=''):
+		''' Returns dictionary representation of Topic '''
 		values = {
 			'key' : self.name,
 			'desc' : self.long_name
 		}
 		return values
 
-	def to_tuple(self):
-		return (self.name, self.long_name)
-	
 class TaggableObject(models.Model):
+	''' Base class for Folder and Document since both have topics lists'''
 	topics = models.ManyToManyField(Topic)
 	class Meta:
 		abstract = True
@@ -37,7 +36,7 @@ class Folder(TaggableObject):
 		return self.name
 
 	def to_dict(self, url=''):
-		''' Returns JSON representation of Folder'''
+		''' Returns dictionary representation of Folder'''
 		values = {}
 		values['data_type'] = 'folder'
 		values['name'] = self.name
@@ -45,11 +44,16 @@ class Folder(TaggableObject):
 		values['topics'] = self.get_topics_list()
 
 		# Get list of documents corresponding to this folder
-		docs = Document.objects.all()
-		docs = docs.filter(folder_key=self.pk)
+		docs = self.get_documents()
 		values['items'] = [d.to_dict(url) for d in docs]
 
 		return values
+
+	def get_documents(self):
+		''' Returns QuerySet of documents in this folder'''
+		docs = Document.objects.all()
+		docs = docs.filter(folder_key=self.pk)
+		return docs
 
 class Document(TaggableObject):
 	name = models.CharField(max_length=max_wlen)
@@ -61,7 +65,7 @@ class Document(TaggableObject):
 		return (self.name)
 
 	def to_dict(self, url):
-		''' Returns JSON representation of Document'''
+		''' Returns dictionary representation of Document'''
 		values = {}
 		values['data_type'] = 'doc'
 		values['name'] = self.name
