@@ -11,7 +11,7 @@ class Topic(models.Model):
 	def __str__(self):
 		return self.name
 
-	def to_dict(self):
+	def to_dict(self, url=''):
 		values = {
 			'key' : self.name,
 			'desc' : self.long_name
