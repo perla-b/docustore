@@ -31,7 +31,7 @@ class TaggableObject(models.Model):
 		return [topic.to_dict() for topic in topics]
 
 class Folder(TaggableObject):
-	name = models.CharField(max_length=max_wlen)
+	name = models.CharField(max_length=max_wlen, primary_key=True)
 	def __str__(self):
 		return self.name
 
