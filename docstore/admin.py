@@ -9,7 +9,7 @@ class DocumentAdmin(admin.ModelAdmin):
     fields = ['name', 'file', 'folder_key', 'topics']
 
 class TopicAdmin(admin.ModelAdmin):
-    fields = ['name', 'long_name']
+    fields = ['name', 'desc']
 
 admin.site.register(Folder, FolderAdmin)
 admin.site.register(Document, DocumentAdmin)
