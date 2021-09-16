@@ -1,1 +1,0 @@
-[{"model": "docstore.folder", "pk": 3, "fields": {"name": "Produce", "topics": ["fruit", "herbs", "veggies"]}}, {"model": "docstore.folder", "pk": 5, "fields": {"name": "Dry Goods", "topics": ["herbs", "legumes", "starch"]}}, {"model": "docstore.folder", "pk": 6, "fields": {"name": "Canned foods", "topics": ["fruit", "legumes", "veggies"]}}]
