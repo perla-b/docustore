@@ -74,7 +74,7 @@ class Document(TaggableObject):
 		values['folder'] = self.folder_key.name
 		values['folder_key'] = self.folder_key.pk
 		values['topics'] = self.get_topics_list()
-		values['file_url'] = '/'.join([url, self.file.url])
+		values['file_url'] = ''.join([url, self.file.url])
 
 		return values
 	

@@ -31,6 +31,8 @@ def list_view(request):
     ''' Lists data objects from a query '''
     # Get host URL
     url = request.get_host()
+    if not url.endswith('/'):
+        url += '/'
 
     # Find items matching request and map to JSON string
     items = search(request)
@@ -42,6 +44,8 @@ def list_view(request):
 def extract_request_info(request):
     # Get host URL and load object info
     url = request.get_host()
+    if not url.endswith('/'):
+        url += '/'
     opts = json.loads(request.body)
     dtype = opts.get('data_type')
     return url, opts, dtype
