@@ -195,6 +195,6 @@ def delete_item(dtype, options):
     found = (obj is not None)
 
     # Delete object if one is found
-    if obj is not None:
+    if found:
         obj.delete()
     return found

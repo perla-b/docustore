@@ -1,5 +1,5 @@
 from django.core.exceptions import BadRequest
-from django.http.response import Http404, HttpResponseBadRequest, HttpResponsePermanentRedirect
+from django.http.response import Http404, HttpResponseBadRequest, HttpResponseNotFound, HttpResponsePermanentRedirect
 from django.http import HttpResponse, FileResponse
 from docstore import model_search
 
@@ -83,12 +83,12 @@ def update(request):
 
         # 404 if no object is updated
         if obj is None:
-            return Http404()
+            return HttpResponseNotFound()
         return format_response(obj, url)
     else:
         return HttpResponseBadRequest()
 
-def delete(request):
+def delete_view(request):
     if request.method == 'DELETE':
         # Extract request info
         url, opts, dtype = extract_request_info(request)
@@ -99,8 +99,10 @@ def delete(request):
 
             # 404 if no object is found
             if not found:
-                return Http404()
+                return HttpResponseNotFound()
             else:
                 return HttpResponse('Succesfully deleted.')
+        else:
+            return HttpResponseBadRequest()
     else:
         return HttpResponseBadRequest()

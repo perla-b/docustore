@@ -24,6 +24,6 @@ urlpatterns = [
     path('list/', views.list_view),
     path('create/', views.create),
     path('update/', views.update),
-    path('delete/', views.delete)
+    path('delete/', views.delete_view)
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

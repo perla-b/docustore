@@ -59,8 +59,7 @@ class Folder(TaggableObject):
 class Document(TaggableObject):
 	name = models.CharField(max_length=max_wlen)
 	file = models.FileField(settings.MEDIA_ROOT)
-	folder_key = models.ForeignKey(Folder, on_delete=models.SET_NULL, 
-		null=True)
+	folder_key = models.ForeignKey(Folder, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return (self.name)
