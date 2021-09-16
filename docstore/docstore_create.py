@@ -1,7 +1,6 @@
 from docstore.maps import dtypes
 from typing import FrozenSet
 
-from requests.api import options
 from docstore.models import Folder, Topic, Document
 from docstore.maps import model_maps
 

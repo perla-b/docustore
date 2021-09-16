@@ -1,11 +1,10 @@
 from django.core.exceptions import BadRequest
-from requests.api import options
 from django.http.response import Http404, HttpResponseBadRequest, HttpResponsePermanentRedirect
 from django.http import HttpResponse, FileResponse
 from docstore import model_search
 
 import json
-import docstore_create
+from docstore import docstore_create
 from docstore.maps import dtypes
 
 search_func_map = {
