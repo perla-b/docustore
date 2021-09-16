@@ -1,0 +1,83 @@
+
+List view
+----------
+To view a list of objects, you would send a GET request to:
+https://docstoreapp.herokuapp.com/list
+
+It has one mandatory parameter, "data_type", which specifies whether
+to search for 'folders', 'docs', or 'topics'.
+The following optional parameters are available for each data type
+	folder
+		name - finds folder w/ given name
+		topics - finds folder w/ given list of topics
+	docs
+		name - finds document(s) w/ given name TODO: Test case, duplicate names across folders
+		topics - finds document(s) that have a topic within this given list of topics
+		folder - specifies folder to look for documents in
+	topic
+		name - finds topics w/ given short form descriptor
+		desc - finds topics w/ a given substring in its long form descriptor
+
+Example:
+To search for all documents with the 'fruit' or 'legumes' tag,
+https://docstoreapp.herokuapp.com/list?data_type=docs&topics="fruit,legumes"
+
+Create view
+-----------
+To create an object you would send a POST request to
+https://docstoreapp.herokuapp.com/create/
+
+The parameters are the same as for the list view, except that 'docs' have an additional argument
+'file' that specifies the document to upload and the topics should have both short and long-form
+descriptors specified.
+
+Example:
+To create a folder named 'Beverages' with the tag 'drinks', the following would be passed as data
+in JSON format
+{
+	'data_type' : 'folders'
+	'name' : 'Beverages',
+	'tags' : [
+		'name' : 'drinks',
+		'name' : 'Drinks'
+	]
+}
+
+
+Update view
+------------
+To update an object you would send a PUT request to 
+https://docstoreapp.herokuapp.com/update/
+
+The parameters are also the same as for the Create view, except
+that the 'key' for the object must be specified.
+
+Example:
+Since a folder's name is also it's key, to update the topics list for a folder
+named 'Snacks' to 'junk' the data in the request would be
+{
+	'data_type' : 'folders',
+	'key' : 'Snacks',
+	'topics' : [
+		{
+			'name' : 'junk',
+			'desc' : 'Junk Food',
+		}
+	]
+}
+
+
+Delete view
+-----------
+To delete an object you would send a DELETE request to
+https://docstoreapp.herokuapp.com/delete/
+
+The required parameters are the 'data_type' and the 'key'
+
+Example:
+To delete a document with the key 5, the data in the request would be
+{
+	'data_type' : 'docs',
+	'key' : 5
+}
+ 
