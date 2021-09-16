@@ -84,19 +84,3 @@ class Document(TaggableObject):
 		dupl_files = Document.objects.all().filter(folder_key=folder, name=name)
 		if len(dupl_files) > 0:
 			raise ValidationError('Cannot have duplicate document names in same folder')
-
-	def clean_folder_key(self):
-		print ('HEERE', self.cleaned_data)
-
-'''
-	folder
-		name - finds folder w/ given name
-		topics - finds folder w/ given list of topics
-	docs
-		name - finds document(s) w/ given name TODO: Test case, duplicate names across folders
-		topics - finds document(s) w/ given list of topics
-		folder - specifies folder to look for documents in
-	topic
-		name - finds topics w/ given short form descriptor
-		desc - finds topics w/ a given substring in its long form descriptor
-'''
