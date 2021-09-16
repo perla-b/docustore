@@ -83,4 +83,5 @@ class Document(TaggableObject):
 		folder = self.folder_key
 		dupl_files = Document.objects.all().filter(folder_key=folder, name=name)
 		if len(dupl_files) > 0:
-			raise ValidationError('Cannot have duplicate document names in same folder')
+			if dupl_files[0] != self:
+				raise ValidationError('Cannot have duplicate document names in same folder')
