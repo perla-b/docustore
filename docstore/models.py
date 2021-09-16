@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 import urllib.parse
+from django.core.exceptions import ValidationError
 
 max_wlen = 200
 
@@ -77,6 +78,16 @@ class Document(TaggableObject):
 		values['file_url'] = urllib.parse.urljoin(url, self.file.url)
 
 		return values
+	
+	def clean(self):
+		name = self.name
+		folder = self.folder_key
+		dupl_files = Document.objects.all().filter(folder_key=folder, name=name)
+		if len(dupl_files) > 0:
+			raise ValidationError('Cannot have duplicate document names in same folder')
+
+	def clean_folder_key(self):
+		print ('HEERE', self.cleaned_data)
 
 '''
 	folder

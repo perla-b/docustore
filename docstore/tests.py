@@ -1,8 +1,8 @@
 from django.test import TestCase
 from docstore.models import Folder, Topic, Document
+from django.urls import reverse
 
 class QueryTest(TestCase):
-    fixtures = ['docs.json', 'topics.json', 'folders.json']
     def test(self):
         # Find all herb-related documents
         docs = Document.objects.all()
@@ -22,12 +22,8 @@ class QueryTest(TestCase):
         # Find all folders with legumes or herbs in tag
         legume_folders = folders.filter(topics__in=['legumes', 'herbs']).distinct()
         folder_keys = [folder.name for folder in legume_folders]
-        for folder in folders:
-            print (folder, folder.topics.all())
-        print (folder_keys)
         assert (set(folder_keys) == set(['Dry Goods', 'Produce', 'Canned foods']))
 
         # Find all folders with meat in tag (None)
         starch_folders = folders.filter(topics__in=['mear'])
         assert (len(starch_folders) == 0)
-        
